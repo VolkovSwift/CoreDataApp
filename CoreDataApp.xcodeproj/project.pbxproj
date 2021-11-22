@@ -25,6 +25,7 @@
 		37D2B17E274B0E7F0031DBBE /* Employee+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D2B17A274B0E7F0031DBBE /* Employee+CoreDataClass.swift */; };
 		37D2B17F274B0E7F0031DBBE /* Employee+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D2B17B274B0E7F0031DBBE /* Employee+CoreDataProperties.swift */; };
 		37D2B181274B10E90031DBBE /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D2B180274B10E90031DBBE /* CoreDataStack.swift */; };
+		37D41C78274C330700E0A72D /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D41C77274C330700E0A72D /* Alert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		37D2B17A274B0E7F0031DBBE /* Employee+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Employee+CoreDataClass.swift"; sourceTree = "<group>"; };
 		37D2B17B274B0E7F0031DBBE /* Employee+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Employee+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		37D2B180274B10E90031DBBE /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		37D41C77274C330700E0A72D /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,17 +124,16 @@
 		373A1FA227482A3D00491AC6 /* CoreDataApp */ = {
 			isa = PBXGroup;
 			children = (
+				37D41C7C274C3CA200E0A72D /* Providers */,
+				37D41C7B274C3C8500E0A72D /* View Models */,
+				37D41C7A274C3C7E00E0A72D /* View Controllers */,
+				37D41C79274C3C7400E0A72D /* Custom Views */,
 				373A1FA327482A3D00491AC6 /* AppDelegate.swift */,
 				373A1FA527482A3D00491AC6 /* SceneDelegate.swift */,
-				373A1FA727482A3D00491AC6 /* OrganizationsViewController.swift */,
 				373A1FAF27482A3E00491AC6 /* Assets.xcassets */,
 				373A1FB127482A3E00491AC6 /* LaunchScreen.storyboard */,
 				373A1FB427482A3E00491AC6 /* Info.plist */,
 				373A1FAC27482A3D00491AC6 /* CoreDataApp.xcdatamodeld */,
-				37D2B156274A904E0031DBBE /* OrganizationsViewModel.swift */,
-				37D2B15A274A95490031DBBE /* EmployeesViewController.swift */,
-				37D2B15C274A95590031DBBE /* CoreDataProvider.swift */,
-				37D2B15E274A95680031DBBE /* EmployeesViewModel.swift */,
 			);
 			path = CoreDataApp;
 			sourceTree = "<group>";
@@ -152,6 +153,40 @@
 				373A1FC927482A3E00491AC6 /* CoreDataAppUITestsLaunchTests.swift */,
 			);
 			path = CoreDataAppUITests;
+			sourceTree = "<group>";
+		};
+		37D41C79274C3C7400E0A72D /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				37D41C77274C330700E0A72D /* Alert.swift */,
+			);
+			path = "Custom Views";
+			sourceTree = "<group>";
+		};
+		37D41C7A274C3C7E00E0A72D /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				37D2B15A274A95490031DBBE /* EmployeesViewController.swift */,
+				373A1FA727482A3D00491AC6 /* OrganizationsViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		37D41C7B274C3C8500E0A72D /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				37D2B15E274A95680031DBBE /* EmployeesViewModel.swift */,
+				37D2B156274A904E0031DBBE /* OrganizationsViewModel.swift */,
+			);
+			path = "View Models";
+			sourceTree = "<group>";
+		};
+		37D41C7C274C3CA200E0A72D /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				37D2B15C274A95590031DBBE /* CoreDataProvider.swift */,
+			);
+			path = Providers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,6 +325,7 @@
 				373A1FAE27482A3D00491AC6 /* CoreDataApp.xcdatamodeld in Sources */,
 				37D2B15F274A95680031DBBE /* EmployeesViewModel.swift in Sources */,
 				37D2B15B274A95490031DBBE /* EmployeesViewController.swift in Sources */,
+				37D41C78274C330700E0A72D /* Alert.swift in Sources */,
 				37D2B181274B10E90031DBBE /* CoreDataStack.swift in Sources */,
 				37D2B17D274B0E7F0031DBBE /* Organization+CoreDataProperties.swift in Sources */,
 				37D2B17C274B0E7F0031DBBE /* Organization+CoreDataClass.swift in Sources */,
