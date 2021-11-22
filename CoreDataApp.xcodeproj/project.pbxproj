@@ -20,6 +20,11 @@
 		37D2B15B274A95490031DBBE /* EmployeesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D2B15A274A95490031DBBE /* EmployeesViewController.swift */; };
 		37D2B15D274A95590031DBBE /* CoreDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D2B15C274A95590031DBBE /* CoreDataProvider.swift */; };
 		37D2B15F274A95680031DBBE /* EmployeesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D2B15E274A95680031DBBE /* EmployeesViewModel.swift */; };
+		37D2B17C274B0E7F0031DBBE /* Organization+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D2B178274B0E7F0031DBBE /* Organization+CoreDataClass.swift */; };
+		37D2B17D274B0E7F0031DBBE /* Organization+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D2B179274B0E7F0031DBBE /* Organization+CoreDataProperties.swift */; };
+		37D2B17E274B0E7F0031DBBE /* Employee+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D2B17A274B0E7F0031DBBE /* Employee+CoreDataClass.swift */; };
+		37D2B17F274B0E7F0031DBBE /* Employee+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D2B17B274B0E7F0031DBBE /* Employee+CoreDataProperties.swift */; };
+		37D2B181274B10E90031DBBE /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D2B180274B10E90031DBBE /* CoreDataStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +62,11 @@
 		37D2B15A274A95490031DBBE /* EmployeesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeesViewController.swift; sourceTree = "<group>"; };
 		37D2B15C274A95590031DBBE /* CoreDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataProvider.swift; sourceTree = "<group>"; };
 		37D2B15E274A95680031DBBE /* EmployeesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeesViewModel.swift; sourceTree = "<group>"; };
+		37D2B178274B0E7F0031DBBE /* Organization+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Organization+CoreDataClass.swift"; sourceTree = "<group>"; };
+		37D2B179274B0E7F0031DBBE /* Organization+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Organization+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		37D2B17A274B0E7F0031DBBE /* Employee+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Employee+CoreDataClass.swift"; sourceTree = "<group>"; };
+		37D2B17B274B0E7F0031DBBE /* Employee+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Employee+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		37D2B180274B10E90031DBBE /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +97,11 @@
 		373A1F9727482A3D00491AC6 = {
 			isa = PBXGroup;
 			children = (
+				37D2B180274B10E90031DBBE /* CoreDataStack.swift */,
+				37D2B178274B0E7F0031DBBE /* Organization+CoreDataClass.swift */,
+				37D2B179274B0E7F0031DBBE /* Organization+CoreDataProperties.swift */,
+				37D2B17A274B0E7F0031DBBE /* Employee+CoreDataClass.swift */,
+				37D2B17B274B0E7F0031DBBE /* Employee+CoreDataProperties.swift */,
 				373A1FA227482A3D00491AC6 /* CoreDataApp */,
 				373A1FBC27482A3E00491AC6 /* CoreDataAppTests */,
 				373A1FC627482A3E00491AC6 /* CoreDataAppUITests */,
@@ -269,10 +284,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37D2B17E274B0E7F0031DBBE /* Employee+CoreDataClass.swift in Sources */,
+				37D2B17F274B0E7F0031DBBE /* Employee+CoreDataProperties.swift in Sources */,
 				37D2B157274A904E0031DBBE /* OrganizationsViewModel.swift in Sources */,
 				373A1FAE27482A3D00491AC6 /* CoreDataApp.xcdatamodeld in Sources */,
 				37D2B15F274A95680031DBBE /* EmployeesViewModel.swift in Sources */,
 				37D2B15B274A95490031DBBE /* EmployeesViewController.swift in Sources */,
+				37D2B181274B10E90031DBBE /* CoreDataStack.swift in Sources */,
+				37D2B17D274B0E7F0031DBBE /* Organization+CoreDataProperties.swift in Sources */,
+				37D2B17C274B0E7F0031DBBE /* Organization+CoreDataClass.swift in Sources */,
 				373A1FA827482A3D00491AC6 /* OrganizationsViewController.swift in Sources */,
 				37D2B15D274A95590031DBBE /* CoreDataProvider.swift in Sources */,
 				373A1FA427482A3D00491AC6 /* AppDelegate.swift in Sources */,
