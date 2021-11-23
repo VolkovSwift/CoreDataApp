@@ -18,6 +18,8 @@ final class OrganizationsViewController: UIViewController {
     
     // MARK: - Lifecycle
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpLayout()
@@ -89,8 +91,10 @@ extension OrganizationsViewController: UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let _ = viewModel.organizations[indexPath.row]
-        print("Hello")
+        let organization = viewModel.organizations[indexPath.row]
+        let viewModel = EmployeesViewModel(organization: organization)
+        let vc = EmployeesViewController(viewModel: viewModel)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

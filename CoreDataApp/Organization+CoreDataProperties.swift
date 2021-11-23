@@ -1,8 +1,8 @@
 //
-//  Employee+CoreDataProperties.swift
+//  Organization+CoreDataProperties.swift
 //  CoreDataApp
 //
-//  Created by Vlad Volkov on 22.11.21.
+//  Created by Vlad Volkov on 23.11.21.
 //
 //
 
@@ -10,20 +10,19 @@ import Foundation
 import CoreData
 
 
-extension Employee {
+extension Organization {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Employee> {
-        return NSFetchRequest<Employee>(entityName: "Employee")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<Organization> {
+        return NSFetchRequest<Organization>(entityName: "Organization")
     }
 
     @NSManaged public var name: String?
     @NSManaged public var employees: NSOrderedSet?
-    @NSManaged public var organization: Organization?
 
 }
 
 // MARK: Generated accessors for employees
-extension Employee {
+extension Organization {
 
     @objc(insertObject:inEmployeesAtIndex:)
     @NSManaged public func insertIntoEmployees(_ value: Employee, at idx: Int)
@@ -57,6 +56,6 @@ extension Employee {
 
 }
 
-extension Employee : Identifiable {
+extension Organization : Identifiable {
 
 }

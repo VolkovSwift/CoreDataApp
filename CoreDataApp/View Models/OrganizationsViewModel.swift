@@ -8,8 +8,7 @@
 import UIKit
 import Combine
 
-class OrganizationsViewModel {
-//    var organizations: [String] = ["First", "Second"]
+final class OrganizationsViewModel {
     
     // MARK: - Input
     let startSubject = PassthroughSubject<Void, Never>()
