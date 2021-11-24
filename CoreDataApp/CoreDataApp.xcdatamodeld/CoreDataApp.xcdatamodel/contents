@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19461" systemVersion="20G95" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19461" systemVersion="21A559" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Employee" representedClassName=".Employee" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="organization" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Organization" inverseName="employees" inverseEntity="Organization"/>
+        <relationship name="boss" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Employee" inverseName="employees" inverseEntity="Employee"/>
+        <relationship name="employees" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Employee" inverseName="boss" inverseEntity="Employee"/>
+        <relationship name="organization" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Organization" inverseName="employees" inverseEntity="Organization"/>
     </entity>
     <entity name="Organization" representedClassName=".Organization" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String"/>
@@ -11,7 +13,7 @@
     <fetchRequest name="EmployeesFetch" entity="Organization" predicateString="name CONTAINS &quot;&quot;" fetchLimit="1"/>
     <fetchRequest name="OrganizationsFetch" entity="Organization"/>
     <elements>
-        <element name="Employee" positionX="-9.91015625" positionY="-211.17578125" width="128" height="59"/>
+        <element name="Employee" positionX="-9.91015625" positionY="-211.17578125" width="128" height="89"/>
         <element name="Organization" positionX="-395.578125" positionY="-147.21875" width="128" height="59"/>
     </elements>
 </model>

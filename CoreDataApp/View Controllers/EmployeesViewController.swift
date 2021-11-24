@@ -41,7 +41,8 @@ final class EmployeesViewController: UIViewController {
     // MARK: - Private functions
     
     private func setUpLayout() {
-        navigationItem.title = "Employees"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.title = "Employees of \(viewModel.boss?.name ?? viewModel.organization.name)"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addTapped))
         setUpTableViewLayout()
     }
@@ -101,7 +102,9 @@ extension EmployeesViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let _ = viewModel.employees?[indexPath.row]
-        print("Hello")
+        let employee = viewModel.employees![indexPath.row]
+        let viewModel = EmployeesViewModel(organization: viewModel.organization, boss: employee as! Employee)
+        let vc = EmployeesViewController(viewModel: viewModel)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -2,7 +2,7 @@
 //  Employee+CoreDataClass.swift
 //  CoreDataApp
 //
-//  Created by Uladzislau Volkau on 24.11.21.
+//  Created by Vlad Volkov on 24.11.21.
 //
 //
 

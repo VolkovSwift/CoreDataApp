@@ -31,6 +31,7 @@ final class OrganizationsViewController: UIViewController {
     // MARK: - Private functions
     
     private func setUpLayout() {
+        navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Organizations"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addTapped))
         setUpTableViewLayout()
@@ -95,6 +96,10 @@ extension OrganizationsViewController: UITableViewDataSource, UITableViewDelegat
         let viewModel = EmployeesViewModel(organization: organization)
         let vc = EmployeesViewController(viewModel: viewModel)
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70.0
     }
 }
 

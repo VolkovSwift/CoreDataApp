@@ -38,15 +38,6 @@ class CoreDataProvider: CoreDataProviderType {
     }
     
     func getOrganization(name: String) -> Organization? {
-//        guard let model =
-//                coreDataStack.managedContext
-//                .persistentStoreCoordinator?.managedObjectModel,
-////              let fetchRequest = model
-//
-//                .fetchRequestTemplate(forName: "OrganizationsFetch")
-////                as? NSFetchRequest<Organization> else {
-//                    return nil
-//                }
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Organization")
         fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Organization.name), name)
         do {
@@ -59,6 +50,20 @@ class CoreDataProvider: CoreDataProviderType {
         }
     }
     
+    func getEmployee(name: String) -> Employee? {
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Employee")
+        fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Employee.name), name)
+        do {
+            let results = try coreDataStack.managedContext.fetch(fetchRequest)
+            return results.first as? Employee
+            
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+            return nil
+        }
+    }
+
+    
     
     func addOrganization(name: String) -> Organization {
         let organization = Organization(context: coreDataStack.managedContext)
@@ -69,6 +74,22 @@ class CoreDataProvider: CoreDataProviderType {
     
     func getEmployees(of organization: Organization) -> NSOrderedSet {
         return organization.employees  ?? []
+    }
+    
+    func getEmployees(of boss: Employee) -> NSOrderedSet {
+        return boss.employees ?? []
+    }
+    
+    
+    func addEmployeeWithBoss(bossName: String, name: String) -> Employee? {
+        let employee = Employee(context: coreDataStack.managedContext)
+        employee.name = name
+        
+        guard let boss = getEmployee(name: bossName) else { return nil }
+        boss.addToEmployees(employee)
+        coreDataStack.saveContext()
+        return employee
+        
     }
     
     
