@@ -49,8 +49,9 @@ final class EmployeesViewModel {
     private func bindTextFieldSubject() {
         startSubject
             .sink { [weak self] _ in
-                self?.employees = self?.coreDataProvider.getEmployees(of: self!.organization) ?? []
-                self?.updateTriggerSubject.send()
+                guard let self = self else { return }
+                self.employees = self.coreDataProvider.getEmployees(of: self.organization)
+                self.updateTriggerSubject.send()
             }
             .store(in: &cancellables)
     }
@@ -58,9 +59,18 @@ final class EmployeesViewModel {
     private func reactToAddButtonTap() {
         addButtonTappedSubject
         .sink { [weak self] name in
-            guard let organization = self?.coreDataProvider.addOrganization(name: name) else { return }
-            self?.coreDataProvider.addEmployee(organization: organization, name: name)
-            self?.updateTriggerSubject.send()
+            guard let self = self else { return }
+                  
+//            let organization = self.coreDataProvider.addOrganization(name: name) else { return }
+                  
+//            let organization = self
+            let employee = self.coreDataProvider.addEmployee(orgName: self.organization.name ?? "", name: name)
+//            let employee = self.coreDataProvider.addEmployee(organization: self.organization, name: name)
+//            let mutable = self.employees?.mutableCopy() as! NSMutableOrderedSet
+//            organization.addToEmployees(employee)
+//            mutable.add(employee)
+//            self.employees = mutable
+            self.updateTriggerSubject.send()
         }
         .store(in: &cancellables)
     }

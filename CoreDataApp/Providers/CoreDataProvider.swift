@@ -37,6 +37,29 @@ class CoreDataProvider: CoreDataProviderType {
         }
     }
     
+    func getOrganization(name: String) -> Organization? {
+//        guard let model =
+//                coreDataStack.managedContext
+//                .persistentStoreCoordinator?.managedObjectModel,
+////              let fetchRequest = model
+//
+//                .fetchRequestTemplate(forName: "OrganizationsFetch")
+////                as? NSFetchRequest<Organization> else {
+//                    return nil
+//                }
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Organization")
+        fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Organization.name), name)
+        do {
+            let results = try coreDataStack.managedContext.fetch(fetchRequest)
+            return results.first as! Organization
+            
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+            return nil
+        }
+    }
+    
+    
     func addOrganization(name: String) -> Organization {
         let organization = Organization(context: coreDataStack.managedContext)
         organization.name = name
@@ -49,14 +72,15 @@ class CoreDataProvider: CoreDataProviderType {
     }
     
     
-    func addEmployee(organization: Organization, name: String) -> Employee {
+    func addEmployee(orgName: String, name: String) -> Employee? {
         let employee = Employee(context: coreDataStack.managedContext)
         employee.name = name
-        organization.addToEmployees(employee)
-//        if let employees = organization.employees?.mutableCopy() as? NSMutableOrderedSet {
-//            employees.add(employee)
-//            organization.employees = employees
-//        }
+        
+        guard let org = getOrganization(name: orgName) else { return nil }
+        org.addToEmployees(employee)
+        
+        
+//        organization.addToEmployees(employee)
         coreDataStack.saveContext()
         return employee
     }
