@@ -16,16 +16,16 @@
 		373A1FBE27482A3E00491AC6 /* CoreDataAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373A1FBD27482A3E00491AC6 /* CoreDataAppTests.swift */; };
 		373A1FC827482A3E00491AC6 /* CoreDataAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373A1FC727482A3E00491AC6 /* CoreDataAppUITests.swift */; };
 		373A1FCA27482A3E00491AC6 /* CoreDataAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373A1FC927482A3E00491AC6 /* CoreDataAppUITestsLaunchTests.swift */; };
-		373F0A13274ED107006F54C8 /* Organization+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373F0A0F274ED107006F54C8 /* Organization+CoreDataClass.swift */; };
-		373F0A14274ED107006F54C8 /* Organization+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373F0A10274ED107006F54C8 /* Organization+CoreDataProperties.swift */; };
-		373F0A15274ED107006F54C8 /* Employee+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373F0A11274ED107006F54C8 /* Employee+CoreDataClass.swift */; };
-		373F0A16274ED107006F54C8 /* Employee+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373F0A12274ED107006F54C8 /* Employee+CoreDataProperties.swift */; };
 		37D2B157274A904E0031DBBE /* OrganizationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D2B156274A904E0031DBBE /* OrganizationsViewModel.swift */; };
 		37D2B15B274A95490031DBBE /* EmployeesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D2B15A274A95490031DBBE /* EmployeesViewController.swift */; };
 		37D2B15D274A95590031DBBE /* CoreDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D2B15C274A95590031DBBE /* CoreDataProvider.swift */; };
 		37D2B15F274A95680031DBBE /* EmployeesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D2B15E274A95680031DBBE /* EmployeesViewModel.swift */; };
 		37D2B181274B10E90031DBBE /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D2B180274B10E90031DBBE /* CoreDataStack.swift */; };
 		37D41C78274C330700E0A72D /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D41C77274C330700E0A72D /* Alert.swift */; };
+		BD641E5A274FD987000FFE9C /* Employee+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD641E56274FD987000FFE9C /* Employee+CoreDataClass.swift */; };
+		BD641E5B274FD987000FFE9C /* Employee+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD641E57274FD987000FFE9C /* Employee+CoreDataProperties.swift */; };
+		BD641E5C274FD987000FFE9C /* Organization+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD641E58274FD987000FFE9C /* Organization+CoreDataClass.swift */; };
+		BD641E5D274FD987000FFE9C /* Organization+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD641E59274FD987000FFE9C /* Organization+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,16 +59,16 @@
 		373A1FC327482A3E00491AC6 /* CoreDataAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreDataAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		373A1FC727482A3E00491AC6 /* CoreDataAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataAppUITests.swift; sourceTree = "<group>"; };
 		373A1FC927482A3E00491AC6 /* CoreDataAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		373F0A0F274ED107006F54C8 /* Organization+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Organization+CoreDataClass.swift"; sourceTree = "<group>"; };
-		373F0A10274ED107006F54C8 /* Organization+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Organization+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		373F0A11274ED107006F54C8 /* Employee+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Employee+CoreDataClass.swift"; sourceTree = "<group>"; };
-		373F0A12274ED107006F54C8 /* Employee+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Employee+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		37D2B156274A904E0031DBBE /* OrganizationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizationsViewModel.swift; sourceTree = "<group>"; };
 		37D2B15A274A95490031DBBE /* EmployeesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeesViewController.swift; sourceTree = "<group>"; };
 		37D2B15C274A95590031DBBE /* CoreDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataProvider.swift; sourceTree = "<group>"; };
 		37D2B15E274A95680031DBBE /* EmployeesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeesViewModel.swift; sourceTree = "<group>"; };
 		37D2B180274B10E90031DBBE /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		37D41C77274C330700E0A72D /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		BD641E56274FD987000FFE9C /* Employee+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Employee+CoreDataClass.swift"; path = "CoreDataApp/Employee+CoreDataClass.swift"; sourceTree = "<group>"; };
+		BD641E57274FD987000FFE9C /* Employee+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Employee+CoreDataProperties.swift"; path = "CoreDataApp/Employee+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BD641E58274FD987000FFE9C /* Organization+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Organization+CoreDataClass.swift"; path = "CoreDataApp/Organization+CoreDataClass.swift"; sourceTree = "<group>"; };
+		BD641E59274FD987000FFE9C /* Organization+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Organization+CoreDataProperties.swift"; path = "CoreDataApp/Organization+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,10 +99,10 @@
 		373A1F9727482A3D00491AC6 = {
 			isa = PBXGroup;
 			children = (
-				373F0A0F274ED107006F54C8 /* Organization+CoreDataClass.swift */,
-				373F0A10274ED107006F54C8 /* Organization+CoreDataProperties.swift */,
-				373F0A11274ED107006F54C8 /* Employee+CoreDataClass.swift */,
-				373F0A12274ED107006F54C8 /* Employee+CoreDataProperties.swift */,
+				BD641E56274FD987000FFE9C /* Employee+CoreDataClass.swift */,
+				BD641E57274FD987000FFE9C /* Employee+CoreDataProperties.swift */,
+				BD641E58274FD987000FFE9C /* Organization+CoreDataClass.swift */,
+				BD641E59274FD987000FFE9C /* Organization+CoreDataProperties.swift */,
 				37D2B180274B10E90031DBBE /* CoreDataStack.swift */,
 				373A1FA227482A3D00491AC6 /* CoreDataApp */,
 				373A1FBC27482A3E00491AC6 /* CoreDataAppTests */,
@@ -319,20 +319,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD641E5C274FD987000FFE9C /* Organization+CoreDataClass.swift in Sources */,
+				BD641E5A274FD987000FFE9C /* Employee+CoreDataClass.swift in Sources */,
+				BD641E5B274FD987000FFE9C /* Employee+CoreDataProperties.swift in Sources */,
 				37D2B157274A904E0031DBBE /* OrganizationsViewModel.swift in Sources */,
+				BD641E5D274FD987000FFE9C /* Organization+CoreDataProperties.swift in Sources */,
 				373A1FAE27482A3D00491AC6 /* CoreDataApp.xcdatamodeld in Sources */,
 				37D2B15F274A95680031DBBE /* EmployeesViewModel.swift in Sources */,
 				37D2B15B274A95490031DBBE /* EmployeesViewController.swift in Sources */,
-				373F0A14274ED107006F54C8 /* Organization+CoreDataProperties.swift in Sources */,
 				37D41C78274C330700E0A72D /* Alert.swift in Sources */,
 				37D2B181274B10E90031DBBE /* CoreDataStack.swift in Sources */,
 				373A1FA827482A3D00491AC6 /* OrganizationsViewController.swift in Sources */,
 				37D2B15D274A95590031DBBE /* CoreDataProvider.swift in Sources */,
-				373F0A15274ED107006F54C8 /* Employee+CoreDataClass.swift in Sources */,
-				373F0A13274ED107006F54C8 /* Organization+CoreDataClass.swift in Sources */,
 				373A1FA427482A3D00491AC6 /* AppDelegate.swift in Sources */,
 				373A1FA627482A3D00491AC6 /* SceneDelegate.swift in Sources */,
-				373F0A16274ED107006F54C8 /* Employee+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,9 +10,10 @@ class CoreDataStack {
     
     init(modelName: String) {
         self.modelName = modelName
+        try? storeContainer.viewContext.setQueryGenerationFrom(.current)
     }
     
-    private lazy var storeContainer: NSPersistentContainer = {
+    lazy var storeContainer: NSPersistentContainer = {
         
         let container = NSPersistentContainer(name: self.modelName)
         container.loadPersistentStores { _, error in

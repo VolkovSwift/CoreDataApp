@@ -62,7 +62,10 @@ final class OrganizationsViewController: UIViewController {
     private func reactToAddButtonTapped() {
         viewModel.updateTriggerPublisher
             .sink { [weak self] _ in
-                self?.tableView.reloadData()
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
+                
             }
             .store(in: &cancellables)
     }
@@ -81,19 +84,19 @@ final class OrganizationsViewController: UIViewController {
 extension OrganizationsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.organizations.count
+        return viewModel.coreDataProvider.numbersOfOrganizations
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
-        let organization = viewModel.organizations[indexPath.row]
-        cell.textLabel?.text = organization.name
+        let organization = viewModel.coreDataProvider.object(at: indexPath.row)
+        cell.textLabel?.text = organization?.name
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let organization = viewModel.organizations[indexPath.row]
-        let viewModel = EmployeesViewModel(organization: organization)
+        guard let organization = viewModel.coreDataProvider.object(at: indexPath.row) else { return }
+        let viewModel = EmployeesViewModel(organization: organization, id: organization.objectID)
         let vc = EmployeesViewController(viewModel: viewModel)
         navigationController?.pushViewController(vc, animated: true)
     }

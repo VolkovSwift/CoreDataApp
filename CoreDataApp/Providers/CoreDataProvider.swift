@@ -10,99 +10,130 @@ import CoreData
 
 protocol CoreDataProviderType {
     func getOrganizations() -> [Organization]
-    func addOrganization(name: String) -> Organization
+    func addOrganization(name: String) -> Organization?
 }
 
-class CoreDataProvider: CoreDataProviderType {
+class CoreDataProvider {
+    
+    private var organizationFetchedIDs: [NSManagedObjectID] = []
+    private var employeesFetchedIDs: [NSManagedObjectID] = []
+    private var organizationObjects: [NSManagedObjectID: Organization] = [:]
+    private var employeesObjects: [NSManagedObjectID: Employee] = [:]
+    
+    
+    var numbersOfOrganizations: Int { organizationFetchedIDs.count }
+    var numberOfEmployees: Int { employeesFetchedIDs.count }
+    
+    
+    func fetch(_ completion: @escaping () -> Void) {
+        coreDataStack.storeContainer.performBackgroundTask { [weak self] context in
+            context.perform {
+                let request: NSFetchRequest<NSManagedObjectID> = NSFetchRequest(entityName: "Organization")
+                request.resultType = .managedObjectIDResultType
+                
+                self?.organizationFetchedIDs = (try? context.fetch(request)) ?? []
+                completion()
+            }
+        }
+    }
+    
+    func fetchEmployees(for id: String, _ completion: @escaping () -> Void) {
+        coreDataStack.storeContainer.performBackgroundTask { [weak self] context in
+            context.perform {
+                let request: NSFetchRequest<NSManagedObjectID> = NSFetchRequest(entityName: "Employee")
+//                request.predicate = NSPredicate(format: "%K == %@", #keyPath(Employee.organization.objectID), id)
+                
+                request.resultType = .managedObjectIDResultType
+                
+                self?.employeesFetchedIDs = (try? context.fetch(request)) ?? []
+                completion()
+            }
+        }
+    }
+    
+    func object(at index: Int) -> Organization? {
+        let id = organizationFetchedIDs[index]
+        
+        if let object = organizationObjects[id] {
+            return object
+        }
+        
+        let viewContext = coreDataStack.storeContainer.viewContext
+        if let object = try? viewContext.existingObject(with: id) as? Organization {
+            organizationObjects[id] = object
+        }
+        
+        return nil
+    }
+    
+    func employeeObject(at index: Int) -> Employee? {
+        let id = employeesFetchedIDs[index]
+        
+        if let object = employeesObjects[id] {
+            return object
+        }
+        
+        let viewContext = coreDataStack.storeContainer.viewContext
+        if let object = try? viewContext.existingObject(with: id) as? Employee {
+            employeesObjects[id] = object
+        }
+        
+        return nil
+    }
+    
+    
+    func generateOrganization(name: String, _ completion: @escaping () -> Void) {
+        coreDataStack.storeContainer.performBackgroundTask { context in
+            let organization = Organization(context: context)
+            organization.name = name
+            
+            do {
+                try context.save()
+                try? self.coreDataStack.storeContainer.viewContext.setQueryGenerationFrom(.current)
+                context.automaticallyMergesChangesFromParent = true
+                self.coreDataStack.storeContainer.viewContext.refreshAllObjects()
+                print("Add Item")
+                self.organizationFetchedIDs.append(organization.objectID)
+                completion()
+                
+            } catch {
+                print("error: \(error)")
+                context.rollback()
+            }
+        }
+    }
+    
+    func generateEmployee(id: NSManagedObjectID, employeeName: String, bossName: String, _ completion: @escaping () -> Void) {
+        coreDataStack.storeContainer.performBackgroundTask { [self] context in
+            let employee = Employee(context: context)
+            employee.name = employeeName
+            
+            
+            let viewContext = self.coreDataStack.storeContainer.viewContext
+            if let object = try? viewContext.existingObject(with: id) as? Organization {
+                employee.organization = object
+//                self.organizationObjects[id] = object
+            }
+
+            
+            do {
+                try context.save()
+                try? self.coreDataStack.storeContainer.viewContext.setQueryGenerationFrom(.current)
+                context.automaticallyMergesChangesFromParent = true
+                self.coreDataStack.storeContainer.viewContext.refreshAllObjects()
+                print("Add Item")
+                self.employeesFetchedIDs.append(employee.objectID)
+                completion()
+                
+            } catch {
+                print("error: \(error)")
+                context.rollback()
+            }
+        }
+    }
     
     
     lazy var coreDataStack = CoreDataStack(modelName: "CoreDataApp")
     var fetchRequest: NSFetchRequest<Organization>?
-    
-    func getOrganizations() -> [Organization] {
-        guard let model =
-                coreDataStack.managedContext
-                .persistentStoreCoordinator?.managedObjectModel,
-              let fetchRequest = model
-                .fetchRequestTemplate(forName: "OrganizationsFetch")
-                as? NSFetchRequest<Organization> else {
-                    return []
-                }
-        do {
-            return try coreDataStack.managedContext.fetch(fetchRequest)
-            
-        } catch let error as NSError {
-            print("Could not fetch \(error), \(error.userInfo)")
-            return []
-        }
-    }
-    
-    func getOrganization(name: String) -> Organization? {
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Organization")
-        fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Organization.name), name)
-        do {
-            let results = try coreDataStack.managedContext.fetch(fetchRequest)
-            return results.first as! Organization
-            
-        } catch let error as NSError {
-            print("Could not fetch \(error), \(error.userInfo)")
-            return nil
-        }
-    }
-    
-    func getEmployee(name: String) -> Employee? {
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Employee")
-        fetchRequest.predicate = NSPredicate(format: "%K == %@", #keyPath(Employee.name), name)
-        do {
-            let results = try coreDataStack.managedContext.fetch(fetchRequest)
-            return results.first as? Employee
-            
-        } catch let error as NSError {
-            print("Could not fetch \(error), \(error.userInfo)")
-            return nil
-        }
-    }
 
-    
-    
-    func addOrganization(name: String) -> Organization {
-        let organization = Organization(context: coreDataStack.managedContext)
-        organization.name = name
-        coreDataStack.saveContext()
-        return organization
-    }
-    
-    func getEmployees(of organization: Organization) -> NSOrderedSet {
-        return organization.employees  ?? []
-    }
-    
-    func getEmployees(of boss: Employee) -> NSOrderedSet {
-        return boss.employees ?? []
-    }
-    
-    
-    func addEmployeeWithBoss(bossName: String, name: String) -> Employee? {
-        let employee = Employee(context: coreDataStack.managedContext)
-        employee.name = name
-        
-        guard let boss = getEmployee(name: bossName) else { return nil }
-        boss.addToEmployees(employee)
-        coreDataStack.saveContext()
-        return employee
-        
-    }
-    
-    
-    func addEmployee(orgName: String, name: String) -> Employee? {
-        let employee = Employee(context: coreDataStack.managedContext)
-        employee.name = name
-        
-        guard let org = getOrganization(name: orgName) else { return nil }
-        org.addToEmployees(employee)
-        
-        
-//        organization.addToEmployees(employee)
-        coreDataStack.saveContext()
-        return employee
-    }
 }

@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import CoreData
 
 final class EmployeesViewModel {
     
@@ -20,6 +21,8 @@ final class EmployeesViewModel {
 
     private(set) var organization: Organization
 //    private(set) var employees: [Employee] = []
+    
+    let bossID: NSManagedObjectID
     private(set) var employees: NSOrderedSet?
     private(set) var boss: Employee?
 
@@ -35,8 +38,9 @@ final class EmployeesViewModel {
     
     // MARK: - Initialization
 
-    init(organization: Organization, boss: Employee? = nil) {
+    init(organization: Organization, id: NSManagedObjectID, boss: Employee? = nil) {
         self.organization = organization
+        self.bossID = id
         self.boss = boss
         self.setUpBindings()
     }
@@ -52,14 +56,9 @@ final class EmployeesViewModel {
             .sink { [weak self] _ in
                 guard let self = self else { return }
                 
-                if let boss = self.boss {
-                    let fetchedEmployees = self.coreDataProvider.getEmployees(of: boss)
-                    self.employees = fetchedEmployees
-                } else {
-                    let fetchedEmployees = self.coreDataProvider.getEmployees(of: self.organization)
-                    self.employees = fetchedEmployees
+                self.coreDataProvider.fetchEmployees(for: self.organization.name ?? "") {
+                    self.updateTriggerSubject.send()
                 }
-                self.updateTriggerSubject.send()
             }
             .store(in: &cancellables)
     }
@@ -68,28 +67,10 @@ final class EmployeesViewModel {
         addButtonTappedSubject
         .sink { [weak self] name in
             guard let self = self else { return }
-            if let boss = self.boss {
-                let employee = self.coreDataProvider.addEmployeeWithBoss(bossName: boss.name ?? "", name: name)
-//
-//                self.employees.append(employee!)
-                
-                let mutable = self.employees?.mutableCopy() as! NSMutableOrderedSet
-                mutable.add(employee)
-                self.employees = mutable
-            } else {
-                let employee = self.coreDataProvider.addEmployee(orgName: self.organization.name ?? "", name: name)
-//                self.employees.append(employee!)
-//
-                
-                let mutable = self.employees?.mutableCopy() as! NSMutableOrderedSet
-                mutable.add(employee)
-                self.employees = mutable
-            }
             
-//            let mutable = self.employees?.mutableCopy() as! NSMutableOrderedSet
-//            mutable.add(employee)
-//            self.employees = mutable
-            self.updateTriggerSubject.send()
+            self.coreDataProvider.generateEmployee(id: self.bossID, employeeName: name, bossName: self.organization.name ?? "") {
+                self.updateTriggerSubject.send()
+            }
         }
         .store(in: &cancellables)
     }

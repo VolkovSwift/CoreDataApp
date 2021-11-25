@@ -2,7 +2,7 @@
 //  Employee+CoreDataProperties.swift
 //  CoreDataApp
 //
-//  Created by Vlad Volkov on 24.11.21.
+//  Created by Uladzislau Volkau on 25.11.21.
 //
 //
 
@@ -17,26 +17,9 @@ extension Employee {
     }
 
     @NSManaged public var name: String?
-    @NSManaged public var organization: NSSet?
-    @NSManaged public var employees: NSOrderedSet?
     @NSManaged public var boss: Employee?
-
-}
-
-// MARK: Generated accessors for organization
-extension Employee {
-
-    @objc(addOrganizationObject:)
-    @NSManaged public func addToOrganization(_ value: Organization)
-
-    @objc(removeOrganizationObject:)
-    @NSManaged public func removeFromOrganization(_ value: Organization)
-
-    @objc(addOrganization:)
-    @NSManaged public func addToOrganization(_ values: NSSet)
-
-    @objc(removeOrganization:)
-    @NSManaged public func removeFromOrganization(_ values: NSSet)
+    @NSManaged public var employees: NSOrderedSet?
+    @NSManaged public var organization: Organization?
 
 }
 
