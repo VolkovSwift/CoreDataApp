@@ -65,10 +65,10 @@
 		37D2B15E274A95680031DBBE /* EmployeesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeesViewModel.swift; sourceTree = "<group>"; };
 		37D2B180274B10E90031DBBE /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		37D41C77274C330700E0A72D /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
-		BD641E56274FD987000FFE9C /* Employee+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Employee+CoreDataClass.swift"; path = "CoreDataApp/Employee+CoreDataClass.swift"; sourceTree = "<group>"; };
-		BD641E57274FD987000FFE9C /* Employee+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Employee+CoreDataProperties.swift"; path = "CoreDataApp/Employee+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		BD641E58274FD987000FFE9C /* Organization+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Organization+CoreDataClass.swift"; path = "CoreDataApp/Organization+CoreDataClass.swift"; sourceTree = "<group>"; };
-		BD641E59274FD987000FFE9C /* Organization+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Organization+CoreDataProperties.swift"; path = "CoreDataApp/Organization+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BD641E56274FD987000FFE9C /* Employee+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Employee+CoreDataClass.swift"; sourceTree = "<group>"; };
+		BD641E57274FD987000FFE9C /* Employee+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Employee+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BD641E58274FD987000FFE9C /* Organization+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Organization+CoreDataClass.swift"; sourceTree = "<group>"; };
+		BD641E59274FD987000FFE9C /* Organization+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Organization+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,11 +99,6 @@
 		373A1F9727482A3D00491AC6 = {
 			isa = PBXGroup;
 			children = (
-				BD641E56274FD987000FFE9C /* Employee+CoreDataClass.swift */,
-				BD641E57274FD987000FFE9C /* Employee+CoreDataProperties.swift */,
-				BD641E58274FD987000FFE9C /* Organization+CoreDataClass.swift */,
-				BD641E59274FD987000FFE9C /* Organization+CoreDataProperties.swift */,
-				37D2B180274B10E90031DBBE /* CoreDataStack.swift */,
 				373A1FA227482A3D00491AC6 /* CoreDataApp */,
 				373A1FBC27482A3E00491AC6 /* CoreDataAppTests */,
 				373A1FC627482A3E00491AC6 /* CoreDataAppUITests */,
@@ -124,7 +119,8 @@
 		373A1FA227482A3D00491AC6 /* CoreDataApp */ = {
 			isa = PBXGroup;
 			children = (
-				37D41C7C274C3CA200E0A72D /* Providers */,
+				BD911D00275123B300C285A9 /* Storage */,
+				BD911CFF2751239100C285A9 /* Model */,
 				37D41C7B274C3C8500E0A72D /* View Models */,
 				37D41C7A274C3C7E00E0A72D /* View Controllers */,
 				37D41C79274C3C7400E0A72D /* Custom Views */,
@@ -181,12 +177,24 @@
 			path = "View Models";
 			sourceTree = "<group>";
 		};
-		37D41C7C274C3CA200E0A72D /* Providers */ = {
+		BD911CFF2751239100C285A9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BD641E56274FD987000FFE9C /* Employee+CoreDataClass.swift */,
+				BD641E57274FD987000FFE9C /* Employee+CoreDataProperties.swift */,
+				BD641E58274FD987000FFE9C /* Organization+CoreDataClass.swift */,
+				BD641E59274FD987000FFE9C /* Organization+CoreDataProperties.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BD911D00275123B300C285A9 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				37D2B180274B10E90031DBBE /* CoreDataStack.swift */,
 				37D2B15C274A95590031DBBE /* CoreDataProvider.swift */,
 			);
-			path = Providers;
+			path = Storage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

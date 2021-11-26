@@ -1,5 +1,4 @@
 import UIKit
-import CoreData
 import Combine
 
 final class OrganizationsViewController: UIViewController {
@@ -17,8 +16,6 @@ final class OrganizationsViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Lifecycle
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,12 +45,10 @@ final class OrganizationsViewController: UIViewController {
         ])
     }
     
-    
     private func setUpTableView() {
         tableView.dataSource = self
         tableView.delegate = self
     }
-    
     
     private func setUpBindings() {
         reactToAddButtonTapped()
@@ -75,7 +70,6 @@ final class OrganizationsViewController: UIViewController {
         let alert = Alert.errorAlert(title: "Add Organization") { name in
             self.viewModel.addButtonTappedSubject.send(name)
         }
-        
         present(alert,animated: true)
     }
 }
@@ -96,13 +90,13 @@ extension OrganizationsViewController: UITableViewDataSource, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let organization = viewModel.coreDataProvider.object(at: indexPath.row) else { return }
-        let viewModel = EmployeesViewModel(organization: organization, id: organization.objectID)
+        let viewModel = EmployeesViewModel(organizationID: organization.objectID, bossID: nil)
         let vc = EmployeesViewController(viewModel: viewModel)
         navigationController?.pushViewController(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70.0
+        return 60.0
     }
 }
 

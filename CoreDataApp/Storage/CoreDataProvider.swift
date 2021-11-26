@@ -14,18 +14,24 @@ protocol CoreDataProviderType {
 }
 
 class CoreDataProvider {
+    lazy var coreDataStack = CoreDataStack(modelName: "CoreDataApp")
+    
+    
+    
     
     private var organizationFetchedIDs: [NSManagedObjectID] = []
     private var employeesFetchedIDs: [NSManagedObjectID] = []
+    private var filteredEmployeesFetchedIDs: [NSManagedObjectID] = []
     private var organizationObjects: [NSManagedObjectID: Organization] = [:]
-    private var employeesObjects: [NSManagedObjectID: Employee] = [:]
+    
+    private var employeeObjects: [NSManagedObjectID: Employee] = [:]
     
     
     var numbersOfOrganizations: Int { organizationFetchedIDs.count }
-    var numberOfEmployees: Int { employeesFetchedIDs.count }
+    var numberOfEmployees: Int { filteredEmployeesFetchedIDs.count }
     
     
-    func fetch(_ completion: @escaping () -> Void) {
+    func fetchOrganizations(_ completion: @escaping () -> Void) {
         coreDataStack.storeContainer.performBackgroundTask { [weak self] context in
             context.perform {
                 let request: NSFetchRequest<NSManagedObjectID> = NSFetchRequest(entityName: "Organization")
@@ -37,16 +43,37 @@ class CoreDataProvider {
         }
     }
     
-    func fetchEmployees(for id: String, _ completion: @escaping () -> Void) {
+    func fetchEmployees(for organizationID: NSManagedObjectID, bossID: NSManagedObjectID?, _ completion: @escaping () -> Void) {
         coreDataStack.storeContainer.performBackgroundTask { [weak self] context in
             context.perform {
-                let request: NSFetchRequest<NSManagedObjectID> = NSFetchRequest(entityName: "Employee")
-//                request.predicate = NSPredicate(format: "%K == %@", #keyPath(Employee.organization.objectID), id)
+                self?.filteredEmployeesFetchedIDs.removeAll()
                 
-                request.resultType = .managedObjectIDResultType
+                if let bossID = bossID {
+                    let request: NSFetchRequest<NSManagedObjectID> = NSFetchRequest(entityName: "Employee")
+                    let boss = context.object(with: bossID)
+                    request.predicate = NSPredicate(format: "boss = %@", boss)
+                    
+                    request.resultType = .managedObjectIDResultType
+                    
+                    self?.filteredEmployeesFetchedIDs = (try? context.fetch(request)) ?? []
+                } else {
+                    let request: NSFetchRequest<NSManagedObjectID> = NSFetchRequest(entityName: "Employee")
+                    let org = context.object(with: organizationID)
+                    request.predicate = NSPredicate(format: "organization = %@", org)
+                    
+                    request.resultType = .managedObjectIDResultType
+                    
+                    self?.filteredEmployeesFetchedIDs = (try? context.fetch(request)) ?? []
+                }
                 
-                self?.employeesFetchedIDs = (try? context.fetch(request)) ?? []
                 completion()
+                
+                
+                
+                
+                
+                
+                
             }
         }
     }
@@ -67,15 +94,15 @@ class CoreDataProvider {
     }
     
     func employeeObject(at index: Int) -> Employee? {
-        let id = employeesFetchedIDs[index]
+        let id = filteredEmployeesFetchedIDs[index]
         
-        if let object = employeesObjects[id] {
+        if let object = employeeObjects[id] {
             return object
         }
         
         let viewContext = coreDataStack.storeContainer.viewContext
         if let object = try? viewContext.existingObject(with: id) as? Employee {
-            employeesObjects[id] = object
+            employeeObjects[id] = object
         }
         
         return nil
@@ -92,7 +119,6 @@ class CoreDataProvider {
                 try? self.coreDataStack.storeContainer.viewContext.setQueryGenerationFrom(.current)
                 context.automaticallyMergesChangesFromParent = true
                 self.coreDataStack.storeContainer.viewContext.refreshAllObjects()
-                print("Add Item")
                 self.organizationFetchedIDs.append(organization.objectID)
                 completion()
                 
@@ -100,40 +126,36 @@ class CoreDataProvider {
                 print("error: \(error)")
                 context.rollback()
             }
+            completion()
         }
     }
     
-    func generateEmployee(id: NSManagedObjectID, employeeName: String, bossName: String, _ completion: @escaping () -> Void) {
+    func addEmployee(organizationID: NSManagedObjectID, bossID: NSManagedObjectID?, employeeName: String, _ completion: @escaping () -> Void) {
         coreDataStack.storeContainer.performBackgroundTask { [self] context in
             let employee = Employee(context: context)
             employee.name = employeeName
             
-            
-            let viewContext = self.coreDataStack.storeContainer.viewContext
-            if let object = try? viewContext.existingObject(with: id) as? Organization {
-                employee.organization = object
-//                self.organizationObjects[id] = object
+           
+            if let bossID = bossID,
+               let boss = try? context.existingObject(with: bossID) as? Employee {
+                employee.boss = boss
             }
-
+            
+            if let object = try? context.existingObject(with: organizationID) as? Organization {
+               object.addToEmployees(employee)
+            }
             
             do {
                 try context.save()
                 try? self.coreDataStack.storeContainer.viewContext.setQueryGenerationFrom(.current)
                 context.automaticallyMergesChangesFromParent = true
                 self.coreDataStack.storeContainer.viewContext.refreshAllObjects()
-                print("Add Item")
                 self.employeesFetchedIDs.append(employee.objectID)
                 completion()
-                
             } catch {
                 print("error: \(error)")
                 context.rollback()
             }
         }
     }
-    
-    
-    lazy var coreDataStack = CoreDataStack(modelName: "CoreDataApp")
-    var fetchRequest: NSFetchRequest<Organization>?
-
 }

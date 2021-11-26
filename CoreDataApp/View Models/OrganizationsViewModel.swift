@@ -44,7 +44,7 @@ final class OrganizationsViewModel {
     private func bindTextFieldSubject() {
         startSubject
             .sink { [weak self] _ in
-                self?.coreDataProvider.fetch {
+                self?.coreDataProvider.fetchOrganizations {
                     self?.updateTriggerSubject.send()
                 }
             }
@@ -55,7 +55,10 @@ final class OrganizationsViewModel {
         addButtonTappedSubject
         .sink { [weak self] name in
             self?.coreDataProvider.generateOrganization(name: name, {
-                self?.updateTriggerSubject.send()
+                self?.coreDataProvider.fetchOrganizations {
+                    self?.updateTriggerSubject.send()
+                }
+                
             })
         }
         .store(in: &cancellables)

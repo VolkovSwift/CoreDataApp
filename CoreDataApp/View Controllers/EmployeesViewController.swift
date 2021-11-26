@@ -1,5 +1,4 @@
 import UIKit
-import CoreData
 import Combine
 
 final class EmployeesViewController: UIViewController {
@@ -17,8 +16,6 @@ final class EmployeesViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Lifecycle
-    
-    // MARK: - Object lifecycle
 
     init(viewModel: EmployeesViewModel) {
         self.viewModel = viewModel
@@ -42,7 +39,6 @@ final class EmployeesViewController: UIViewController {
     
     private func setUpLayout() {
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.title = "Employees of \(viewModel.boss?.name ?? viewModel.organization.name)"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addTapped))
         setUpTableViewLayout()
     }
@@ -58,12 +54,10 @@ final class EmployeesViewController: UIViewController {
         ])
     }
     
-    
     private func setUpTableView() {
         tableView.dataSource = self
         tableView.delegate = self
     }
-    
     
     private func setUpBindings() {
         reactToAddButtonTapped()
@@ -84,7 +78,6 @@ final class EmployeesViewController: UIViewController {
         let alert = Alert.errorAlert(title: "Add Employee") { name in
             self.viewModel.addButtonTappedSubject.send(name)
         }
-        
         present(alert,animated: true)
     }
 }
@@ -94,7 +87,6 @@ extension EmployeesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.coreDataProvider.numberOfEmployees
-//        return viewModel.employees?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -105,15 +97,8 @@ extension EmployeesViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        guard let organization = viewModel.coreDataProvider.object(at: indexPath.row) else { return }
-//        let viewModel = EmployeesViewModel(organization: organization)
-//        let vc = EmployeesViewController(viewModel: viewModel)
-//        navigationController?.pushViewController(vc, animated: true)
-        
-        
-        
         let employee = viewModel.coreDataProvider.employeeObject(at: indexPath.row)
-        let viewModel = EmployeesViewModel(organization: viewModel.organization, id: employee!.objectID, boss: employee)
+        let viewModel = EmployeesViewModel(organizationID: viewModel.organizationID, bossID: employee?.objectID)
         let vc = EmployeesViewController(viewModel: viewModel)
         navigationController?.pushViewController(vc, animated: true)
     }
