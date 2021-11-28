@@ -12,26 +12,39 @@ final class OrganizationsViewController: UIViewController {
         return tableView
     }()
     
-    private var viewModel: OrganizationsViewModel = OrganizationsViewModel()
+    private var viewModel: OrganizationsViewModel
     private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Lifecycle
+
+    init(viewModel: OrganizationsViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpLayout()
         setUpTableView()
         setUpBindings()
-        viewModel.startSubject.send()
+        viewModel.fetchOrganizationsSubject.send()
     }
     
     // MARK: - Private functions
     
     private func setUpLayout() {
+        setUpNavigationBarLayout()
+        setUpTableViewLayout()
+    }
+    
+    private func setUpNavigationBarLayout() {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Organizations"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addTapped))
-        setUpTableViewLayout()
     }
     
     private func setUpTableViewLayout() {
@@ -78,18 +91,20 @@ final class OrganizationsViewController: UIViewController {
 extension OrganizationsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.coreDataProvider.numbersOfOrganizations
+        return viewModel.getNumberOfOrganizations()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
-        let organization = viewModel.coreDataProvider.object(at: indexPath.row)
+        let organization = viewModel.getOrganization(at: indexPath.row)
         cell.textLabel?.text = organization?.name
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let organization = viewModel.coreDataProvider.object(at: indexPath.row) else { return }
+        guard
+            let organization = viewModel.getOrganization(at: indexPath.row) else { return }
+        
         let viewModel = EmployeesViewModel(organizationID: organization.objectID, bossID: nil)
         let vc = EmployeesViewController(viewModel: viewModel)
         navigationController?.pushViewController(vc, animated: true)

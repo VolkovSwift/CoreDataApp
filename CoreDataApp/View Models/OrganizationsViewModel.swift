@@ -1,24 +1,12 @@
-//
-//  OrganizationsViewModel.swift
-//  CoreDataApp
-//
-//  Created by Vlad Volkov on 21.11.21.
-//
-
-import UIKit
 import Combine
 
 final class OrganizationsViewModel {
     
     // MARK: - Input
-    let startSubject = PassthroughSubject<Void, Never>()
-    let updateOrganizationsSubject = PassthroughSubject<Void, Never>()
+    let fetchOrganizationsSubject = PassthroughSubject<Void, Never>()
     let addButtonTappedSubject = PassthroughSubject<String, Never>()
 
     // MARK: - Output
-    let coreDataProvider: CoreDataProvider = CoreDataProvider()
-
-    private(set) var organizations: [Organization] = []
 
     private let updateTriggerSubject = PassthroughSubject<Void, Never>()
 
@@ -28,21 +16,35 @@ final class OrganizationsViewModel {
 
     // MARK: - Private properties
 
+    private let coreDataProvider: CoreDataProvider
     private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Initialization
 
-    init() {
+    init(coreDataProvider: CoreDataProvider = CoreDataProvider()) {
+        self.coreDataProvider = coreDataProvider
         setUpBindings()
     }
     
-    private func setUpBindings() {
-        bindTextFieldSubject()
-        reactToAddButtonTap()
+    // MARK: - Internal methods
+    
+    func getNumberOfOrganizations() -> Int {
+        coreDataProvider.numbersOfOrganizations
     }
     
-    private func bindTextFieldSubject() {
-        startSubject
+    func getOrganization(at index:Int) -> Organization? {
+        coreDataProvider.organizationObject(at: index)
+    }
+    
+    // MARK: - Private methods
+    
+    private func setUpBindings() {
+        bindFetchOrganizationsSubject()
+        bindAddButtonTappedSubject()
+    }
+    
+    private func bindFetchOrganizationsSubject() {
+        fetchOrganizationsSubject
             .sink { [weak self] _ in
                 self?.coreDataProvider.fetchOrganizations {
                     self?.updateTriggerSubject.send()
@@ -51,10 +53,10 @@ final class OrganizationsViewModel {
             .store(in: &cancellables)
     }
     
-    private func reactToAddButtonTap() {
+    private func bindAddButtonTappedSubject() {
         addButtonTappedSubject
         .sink { [weak self] name in
-            self?.coreDataProvider.generateOrganization(name: name, {
+            self?.coreDataProvider.addOrganization(name: name, {
                 self?.coreDataProvider.fetchOrganizations {
                     self?.updateTriggerSubject.send()
                 }

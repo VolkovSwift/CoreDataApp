@@ -6,7 +6,7 @@ final class EmployeesViewController: UIViewController {
     // MARK: - Private properties
     
     private let tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .grouped)
+        let tableView = UITableView(frame: .zero)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorInset = .zero
         return tableView
@@ -32,15 +32,19 @@ final class EmployeesViewController: UIViewController {
         setUpLayout()
         setUpTableView()
         setUpBindings()
-        viewModel.startSubject.send()
+        viewModel.employeesFetchRequestSubject.send()
     }
     
     // MARK: - Private functions
     
     private func setUpLayout() {
+        setUpNavigationBarLayout()
+        setUpTableViewLayout()
+    }
+    
+    private func setUpNavigationBarLayout() {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addTapped))
-        setUpTableViewLayout()
     }
     
     private func setUpTableViewLayout() {
@@ -86,20 +90,24 @@ final class EmployeesViewController: UIViewController {
 extension EmployeesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.coreDataProvider.numberOfEmployees
+        return viewModel.getNumberOfEmployees()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
-        let employee = viewModel.coreDataProvider.employeeObject(at: indexPath.row)
+        let employee = viewModel.getEmployee(at: indexPath.row)
         cell.textLabel?.text = employee?.name
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let employee = viewModel.coreDataProvider.employeeObject(at: indexPath.row)
+        let employee = viewModel.getEmployee(at: indexPath.row)
         let viewModel = EmployeesViewModel(organizationID: viewModel.organizationID, bossID: employee?.objectID)
         let vc = EmployeesViewController(viewModel: viewModel)
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60.0
     }
 }

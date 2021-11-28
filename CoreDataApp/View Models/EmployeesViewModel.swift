@@ -12,43 +12,59 @@ import CoreData
 final class EmployeesViewModel {
     
     // MARK: - Input
-    let startSubject = PassthroughSubject<Void, Never>()
-    let updateOrganizationsSubject = PassthroughSubject<Void, Never>()
+    
+    let employeesFetchRequestSubject = PassthroughSubject<Void, Never>()
     let addButtonTappedSubject = PassthroughSubject<String, Never>()
 
     // MARK: - Output
-    let coreDataProvider: CoreDataProvider = CoreDataProvider()
-
-
-    let organizationID: NSManagedObjectID
-    let bossID: NSManagedObjectID?
-    private(set) var employees: NSOrderedSet?
-
-    private let updateTriggerSubject = PassthroughSubject<Void, Never>()
-
+    
     var updateTriggerPublisher: AnyPublisher<Void, Never> {
         updateTriggerSubject.eraseToAnyPublisher()
     }
+    
+    private let updateTriggerSubject = PassthroughSubject<Void, Never>()
+    
+    
+    // MARK: - Properties
+    
+    let organizationID: NSManagedObjectID
+    let bossID: NSManagedObjectID?
 
     // MARK: - Private properties
 
+    private let coreDataProvider: CoreDataProvider
     private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Initialization
 
-    init(organizationID: NSManagedObjectID, bossID: NSManagedObjectID? = nil) {
+    init(coreDataProvider: CoreDataProvider = CoreDataProvider(),
+         organizationID: NSManagedObjectID,
+         bossID: NSManagedObjectID? = nil) {
+        self.coreDataProvider = coreDataProvider
         self.organizationID = organizationID
         self.bossID = bossID
         self.setUpBindings()
     }
-
-    private func setUpBindings() {
-        bindTextFieldSubject()
-        reactToAddButtonTap()
+    
+    // MARK: - Internal methods
+    
+    func getNumberOfEmployees() -> Int {
+        coreDataProvider.numberOfEmployees
     }
     
-    private func bindTextFieldSubject() {
-        startSubject
+    func getEmployee(at index:Int) -> Employee? {
+        coreDataProvider.employeeObject(at: index)
+    }
+    
+    // MARK: - Private methods
+
+    private func setUpBindings() {
+        bindFetchEmployeesSubject()
+        bindAddButtonTappedSubject()
+    }
+    
+    private func bindFetchEmployeesSubject() {
+        employeesFetchRequestSubject
             .sink { [weak self] _ in
                 guard let self = self else { return }
                 
@@ -59,7 +75,7 @@ final class EmployeesViewModel {
             .store(in: &cancellables)
     }
     
-    private func reactToAddButtonTap() {
+    private func bindAddButtonTappedSubject() {
         addButtonTappedSubject
             .sink { [weak self] name in
                 guard let self = self else { return }
@@ -70,5 +86,4 @@ final class EmployeesViewModel {
             }
             .store(in: &cancellables)
     }
-    
 }
