@@ -2,20 +2,16 @@ import Foundation
 import CoreData
 
 class CoreDataStack {
-    private let modelName: String
-    
     lazy var managedContext: NSManagedObjectContext = {
         return self.storeContainer.viewContext
     }()
     
-    init(modelName: String) {
-        self.modelName = modelName
+    init() {
         try? storeContainer.viewContext.setQueryGenerationFrom(.current)
     }
     
     lazy var storeContainer: NSPersistentContainer = {
-        
-        let container = NSPersistentContainer(name: self.modelName)
+        let container = NSPersistentContainer(name: "CoreDataApp")
         container.loadPersistentStores { _, error in
             if let error = error as NSError? {
                 print("Unresolved error \(error), \(error.userInfo)")

@@ -3,17 +3,18 @@ import Combine
 final class OrganizationsViewModel {
     
     // MARK: - Input
+    
     let fetchOrganizationsSubject = PassthroughSubject<Void, Never>()
     let addButtonTappedSubject = PassthroughSubject<String, Never>()
 
     // MARK: - Output
-
+    
     private let updateTriggerSubject = PassthroughSubject<Void, Never>()
-
+    
     var updateTriggerPublisher: AnyPublisher<Void, Never> {
         updateTriggerSubject.eraseToAnyPublisher()
     }
-
+    
     // MARK: - Private properties
 
     private let coreDataProvider: CoreDataProvider
@@ -55,15 +56,13 @@ final class OrganizationsViewModel {
     
     private func bindAddButtonTappedSubject() {
         addButtonTappedSubject
-        .sink { [weak self] name in
-            self?.coreDataProvider.addOrganization(name: name, {
-                self?.coreDataProvider.fetchOrganizations {
-                    self?.updateTriggerSubject.send()
-                }
-                
-            })
-        }
-        .store(in: &cancellables)
+            .sink { [weak self] name in
+                self?.coreDataProvider.addOrganization(name: name, {
+                    self?.coreDataProvider.fetchOrganizations {
+                        self?.updateTriggerSubject.send()
+                    }
+                })
+            }
+            .store(in: &cancellables)
     }
-    
 }

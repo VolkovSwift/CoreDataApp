@@ -12,8 +12,6 @@
 		373A1FA827482A3D00491AC6 /* OrganizationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373A1FA727482A3D00491AC6 /* OrganizationsViewController.swift */; };
 		373A1FAE27482A3D00491AC6 /* CoreDataApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 373A1FAC27482A3D00491AC6 /* CoreDataApp.xcdatamodeld */; };
 		373A1FB027482A3E00491AC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 373A1FAF27482A3E00491AC6 /* Assets.xcassets */; };
-		373A1FB327482A3E00491AC6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 373A1FB127482A3E00491AC6 /* LaunchScreen.storyboard */; };
-		373A1FBE27482A3E00491AC6 /* CoreDataAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373A1FBD27482A3E00491AC6 /* CoreDataAppTests.swift */; };
 		373A1FC827482A3E00491AC6 /* CoreDataAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373A1FC727482A3E00491AC6 /* CoreDataAppUITests.swift */; };
 		373A1FCA27482A3E00491AC6 /* CoreDataAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373A1FC927482A3E00491AC6 /* CoreDataAppUITestsLaunchTests.swift */; };
 		37D2B157274A904E0031DBBE /* OrganizationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D2B156274A904E0031DBBE /* OrganizationsViewModel.swift */; };
@@ -21,7 +19,9 @@
 		37D2B15D274A95590031DBBE /* CoreDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D2B15C274A95590031DBBE /* CoreDataProvider.swift */; };
 		37D2B15F274A95680031DBBE /* EmployeesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D2B15E274A95680031DBBE /* EmployeesViewModel.swift */; };
 		37D2B181274B10E90031DBBE /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D2B180274B10E90031DBBE /* CoreDataStack.swift */; };
-		37D41C78274C330700E0A72D /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D41C77274C330700E0A72D /* Alert.swift */; };
+		BD610E412754E59B00FD3304 /* CoreDataMigrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD610E402754E59B00FD3304 /* CoreDataMigrationTests.swift */; };
+		BD610E452755125D00FD3304 /* NSManagedObject+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD610E442755125D00FD3304 /* NSManagedObject+Ext.swift */; };
+		BD610E472755163400FD3304 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD610E462755163400FD3304 /* UIViewController+Ext.swift */; };
 		BD641E5A274FD987000FFE9C /* Employee+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD641E56274FD987000FFE9C /* Employee+CoreDataClass.swift */; };
 		BD641E5B274FD987000FFE9C /* Employee+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD641E57274FD987000FFE9C /* Employee+CoreDataProperties.swift */; };
 		BD641E5C274FD987000FFE9C /* Organization+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD641E58274FD987000FFE9C /* Organization+CoreDataClass.swift */; };
@@ -52,10 +52,8 @@
 		373A1FA727482A3D00491AC6 /* OrganizationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizationsViewController.swift; sourceTree = "<group>"; };
 		373A1FAD27482A3D00491AC6 /* CoreDataApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataApp.xcdatamodel; sourceTree = "<group>"; };
 		373A1FAF27482A3E00491AC6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		373A1FB227482A3E00491AC6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		373A1FB427482A3E00491AC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		373A1FB427482A3E00491AC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = CoreDataApp/Resources/Info.plist; sourceTree = SOURCE_ROOT; };
 		373A1FB927482A3E00491AC6 /* CoreDataAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreDataAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		373A1FBD27482A3E00491AC6 /* CoreDataAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataAppTests.swift; sourceTree = "<group>"; };
 		373A1FC327482A3E00491AC6 /* CoreDataAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreDataAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		373A1FC727482A3E00491AC6 /* CoreDataAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataAppUITests.swift; sourceTree = "<group>"; };
 		373A1FC927482A3E00491AC6 /* CoreDataAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -64,11 +62,14 @@
 		37D2B15C274A95590031DBBE /* CoreDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataProvider.swift; sourceTree = "<group>"; };
 		37D2B15E274A95680031DBBE /* EmployeesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeesViewModel.swift; sourceTree = "<group>"; };
 		37D2B180274B10E90031DBBE /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
-		37D41C77274C330700E0A72D /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		BD610E402754E59B00FD3304 /* CoreDataMigrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMigrationTests.swift; sourceTree = "<group>"; };
+		BD610E442755125D00FD3304 /* NSManagedObject+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Ext.swift"; sourceTree = "<group>"; };
+		BD610E462755163400FD3304 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		BD641E56274FD987000FFE9C /* Employee+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Employee+CoreDataClass.swift"; sourceTree = "<group>"; };
 		BD641E57274FD987000FFE9C /* Employee+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Employee+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		BD641E58274FD987000FFE9C /* Organization+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Organization+CoreDataClass.swift"; sourceTree = "<group>"; };
 		BD641E59274FD987000FFE9C /* Organization+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Organization+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BDCACE4E2754C2C700E6CEDC /* CoreDataApp v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "CoreDataApp v2.xcdatamodel"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,17 +120,12 @@
 		373A1FA227482A3D00491AC6 /* CoreDataApp */ = {
 			isa = PBXGroup;
 			children = (
+				BD610E4327550ED700FD3304 /* SupportFiles */,
+				BD610E4227550DA500FD3304 /* Resources */,
 				BD911D00275123B300C285A9 /* Storage */,
 				BD911CFF2751239100C285A9 /* Model */,
 				37D41C7B274C3C8500E0A72D /* View Models */,
 				37D41C7A274C3C7E00E0A72D /* View Controllers */,
-				37D41C79274C3C7400E0A72D /* Custom Views */,
-				373A1FA327482A3D00491AC6 /* AppDelegate.swift */,
-				373A1FA527482A3D00491AC6 /* SceneDelegate.swift */,
-				373A1FAF27482A3E00491AC6 /* Assets.xcassets */,
-				373A1FB127482A3E00491AC6 /* LaunchScreen.storyboard */,
-				373A1FB427482A3E00491AC6 /* Info.plist */,
-				373A1FAC27482A3D00491AC6 /* CoreDataApp.xcdatamodeld */,
 			);
 			path = CoreDataApp;
 			sourceTree = "<group>";
@@ -137,7 +133,7 @@
 		373A1FBC27482A3E00491AC6 /* CoreDataAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				373A1FBD27482A3E00491AC6 /* CoreDataAppTests.swift */,
+				BD610E402754E59B00FD3304 /* CoreDataMigrationTests.swift */,
 			);
 			path = CoreDataAppTests;
 			sourceTree = "<group>";
@@ -149,14 +145,6 @@
 				373A1FC927482A3E00491AC6 /* CoreDataAppUITestsLaunchTests.swift */,
 			);
 			path = CoreDataAppUITests;
-			sourceTree = "<group>";
-		};
-		37D41C79274C3C7400E0A72D /* Custom Views */ = {
-			isa = PBXGroup;
-			children = (
-				37D41C77274C330700E0A72D /* Alert.swift */,
-			);
-			path = "Custom Views";
 			sourceTree = "<group>";
 		};
 		37D41C7A274C3C7E00E0A72D /* View Controllers */ = {
@@ -177,9 +165,30 @@
 			path = "View Models";
 			sourceTree = "<group>";
 		};
+		BD610E4227550DA500FD3304 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				373A1FAF27482A3E00491AC6 /* Assets.xcassets */,
+				373A1FB427482A3E00491AC6 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		BD610E4327550ED700FD3304 /* SupportFiles */ = {
+			isa = PBXGroup;
+			children = (
+				373A1FA327482A3D00491AC6 /* AppDelegate.swift */,
+				373A1FA527482A3D00491AC6 /* SceneDelegate.swift */,
+				BD610E442755125D00FD3304 /* NSManagedObject+Ext.swift */,
+				BD610E462755163400FD3304 /* UIViewController+Ext.swift */,
+			);
+			path = SupportFiles;
+			sourceTree = "<group>";
+		};
 		BD911CFF2751239100C285A9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				373A1FAC27482A3D00491AC6 /* CoreDataApp.xcdatamodeld */,
 				BD641E56274FD987000FFE9C /* Employee+CoreDataClass.swift */,
 				BD641E57274FD987000FFE9C /* Employee+CoreDataProperties.swift */,
 				BD641E58274FD987000FFE9C /* Organization+CoreDataClass.swift */,
@@ -301,7 +310,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				373A1FB327482A3E00491AC6 /* LaunchScreen.storyboard in Resources */,
 				373A1FB027482A3E00491AC6 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -332,14 +340,15 @@
 				BD641E5B274FD987000FFE9C /* Employee+CoreDataProperties.swift in Sources */,
 				37D2B157274A904E0031DBBE /* OrganizationsViewModel.swift in Sources */,
 				BD641E5D274FD987000FFE9C /* Organization+CoreDataProperties.swift in Sources */,
+				BD610E452755125D00FD3304 /* NSManagedObject+Ext.swift in Sources */,
 				373A1FAE27482A3D00491AC6 /* CoreDataApp.xcdatamodeld in Sources */,
 				37D2B15F274A95680031DBBE /* EmployeesViewModel.swift in Sources */,
 				37D2B15B274A95490031DBBE /* EmployeesViewController.swift in Sources */,
-				37D41C78274C330700E0A72D /* Alert.swift in Sources */,
 				37D2B181274B10E90031DBBE /* CoreDataStack.swift in Sources */,
 				373A1FA827482A3D00491AC6 /* OrganizationsViewController.swift in Sources */,
 				37D2B15D274A95590031DBBE /* CoreDataProvider.swift in Sources */,
 				373A1FA427482A3D00491AC6 /* AppDelegate.swift in Sources */,
+				BD610E472755163400FD3304 /* UIViewController+Ext.swift in Sources */,
 				373A1FA627482A3D00491AC6 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -348,7 +357,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				373A1FBE27482A3E00491AC6 /* CoreDataAppTests.swift in Sources */,
+				BD610E412754E59B00FD3304 /* CoreDataMigrationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,17 +384,6 @@
 			targetProxy = 373A1FC427482A3E00491AC6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		373A1FB127482A3E00491AC6 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				373A1FB227482A3E00491AC6 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		373A1FCB27482A3E00491AC6 /* Debug */ = {
@@ -513,7 +511,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8392B7X4JB;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CoreDataApp/Info.plist;
+				INFOPLIST_FILE = CoreDataApp/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -540,7 +538,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8392B7X4JB;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CoreDataApp/Info.plist;
+				INFOPLIST_FILE = CoreDataApp/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -699,9 +697,10 @@
 		373A1FAC27482A3D00491AC6 /* CoreDataApp.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				BDCACE4E2754C2C700E6CEDC /* CoreDataApp v2.xcdatamodel */,
 				373A1FAD27482A3D00491AC6 /* CoreDataApp.xcdatamodel */,
 			);
-			currentVersion = 373A1FAD27482A3D00491AC6 /* CoreDataApp.xcdatamodel */;
+			currentVersion = BDCACE4E2754C2C700E6CEDC /* CoreDataApp v2.xcdatamodel */;
 			path = CoreDataApp.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

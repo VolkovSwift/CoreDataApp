@@ -17,6 +17,7 @@ extension Employee {
     }
 
     @NSManaged public var name: String?
+    @NSManaged public var creationDate: Date?
     @NSManaged public var boss: Employee?
     @NSManaged public var employees: NSOrderedSet?
     @NSManaged public var organization: Organization?

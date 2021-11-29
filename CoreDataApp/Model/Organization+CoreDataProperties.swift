@@ -17,6 +17,7 @@ extension Organization {
     }
 
     @NSManaged public var name: String?
+    @NSManaged public var creationDate: Date?
     @NSManaged public var employees: NSOrderedSet?
 
 }

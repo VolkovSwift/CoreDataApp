@@ -8,7 +8,6 @@ final class EmployeesViewController: UIViewController {
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.separatorInset = .zero
         return tableView
     }()
     
@@ -78,11 +77,14 @@ final class EmployeesViewController: UIViewController {
     }
     
     // MARK: - Actions
+    
     @objc func addTapped(_ sender: UIBarButtonItem) {
-        let alert = Alert.errorAlert(title: "Add Employee") { name in
+        presentTextFieldAlert(title: "Add Employee", textFieldPlaceholder: "Enter Employee name") { [weak self] name in
+            guard let self = self,
+            let name = name else { return }
+            
             self.viewModel.addButtonTappedSubject.send(name)
         }
-        present(alert,animated: true)
     }
 }
 

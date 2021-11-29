@@ -1,10 +1,3 @@
-//
-//  EmployeesViewModel.swift
-//  CoreDataApp
-//
-//  Created by Vlad Volkov on 21.11.21.
-//
-
 import Foundation
 import Combine
 import CoreData
@@ -18,21 +11,20 @@ final class EmployeesViewModel {
 
     // MARK: - Output
     
+    private let updateTriggerSubject = PassthroughSubject<Void, Never>()
+    
     var updateTriggerPublisher: AnyPublisher<Void, Never> {
         updateTriggerSubject.eraseToAnyPublisher()
     }
     
-    private let updateTriggerSubject = PassthroughSubject<Void, Never>()
-    
-    
     // MARK: - Properties
     
     let organizationID: NSManagedObjectID
-    let bossID: NSManagedObjectID?
 
     // MARK: - Private properties
 
     private let coreDataProvider: CoreDataProvider
+    private let bossID: NSManagedObjectID?
     private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Initialization
@@ -67,8 +59,7 @@ final class EmployeesViewModel {
         employeesFetchRequestSubject
             .sink { [weak self] _ in
                 guard let self = self else { return }
-                
-                self.coreDataProvider.fetchEmployees(for: self.organizationID, bossID: self.bossID, {
+                self.coreDataProvider.fetchEmployees(with: self.organizationID, bossID: self.bossID, {
                     self.updateTriggerSubject.send()
                 })
             }
@@ -79,8 +70,8 @@ final class EmployeesViewModel {
         addButtonTappedSubject
             .sink { [weak self] name in
                 guard let self = self else { return }
-                
                 self.coreDataProvider.addEmployee(organizationID: self.organizationID, bossID: self.bossID, employeeName: name) {
+                    
                     self.updateTriggerSubject.send()
                 }
             }

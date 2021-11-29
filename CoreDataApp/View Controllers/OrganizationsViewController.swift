@@ -79,11 +79,13 @@ final class OrganizationsViewController: UIViewController {
     }
     
     // MARK: - Actions
+    
     @objc func addTapped(_ sender: UIBarButtonItem) {
-        let alert = Alert.errorAlert(title: "Add Organization") { name in
+        presentTextFieldAlert(title: "Add Organization", textFieldPlaceholder: "Enter Organization name") { [weak self] name in
+            guard let self = self,
+            let name = name else { return }
             self.viewModel.addButtonTappedSubject.send(name)
         }
-        present(alert,animated: true)
     }
 }
 
